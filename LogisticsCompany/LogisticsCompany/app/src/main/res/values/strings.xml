@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">LogisticsCompany</string>
+
+
+    <string name="Open">Open navigation drawer</string>
+    <string name="Close">Close navigation drawer</string>
+</resources>

@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/addTrip"
+        android:title="Add Trip"/>
+
+    <item android:id="@+id/viewTrip"
+        android:title="View Trip"/>
+
+    <item android:id="@+id/viewDriversInfo"
+        android:title="View Drivers Info"
+        />
+
+    <item android:id="@+id/edit_profile"
+        android:title="Edit Profile"/>
+
+    <item android:id="@+id/logout"
+        android:title="Logout"/>
+
+</menu>
