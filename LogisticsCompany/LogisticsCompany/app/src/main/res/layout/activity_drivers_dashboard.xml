@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/_20sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cdAvailableTrips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="@dimen/_3sdp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        android:layout_margin="@dimen/_6sdp"
+        app:cardBackgroundColor="#fff"
+        app:cardMaxElevation="12dp"
+        android:background="@color/whiteCardColor">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/whiteCardColor">
+
+            <ImageView
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/availtrip"
+                android:id="@+id/image" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Available Trips"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:textColor="#000"
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cdCurrentTrips"
+        android:layout_below="@+id/cdAvailableTrips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="@dimen/_3sdp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        android:layout_margin="@dimen/_6sdp"
+        app:cardBackgroundColor="#fff"
+        app:cardMaxElevation="12dp"
+        android:background="@color/whiteCardColor">
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/whiteCardColor">
+
+            <ImageView
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:scaleType="fitXY"
+                android:layout_gravity="center"
+                android:src="@drawable/currenttrips" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Current Trips"
+                android:textColor="#000"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cdCompletedTrips"
+        android:layout_below="@+id/cdCurrentTrips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="@dimen/_3sdp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        android:layout_margin="@dimen/_6sdp"
+        app:cardBackgroundColor="#fff"
+        app:cardMaxElevation="12dp"
+        android:background="@color/whiteCardColor">
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/whiteCardColor">
+
+            <ImageView
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:scaleType="fitXY"
+                android:layout_gravity="center"
+                android:src="@drawable/comptrip" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Compled Trips"
+                android:textColor="#000"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/editprofile"
+        android:layout_below="@+id/cdCompletedTrips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="@dimen/_3sdp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        android:layout_margin="@dimen/_6sdp"
+        app:cardBackgroundColor="#fff"
+        app:cardMaxElevation="12dp"
+        android:background="@color/whiteCardColor">
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/whiteCardColor">
+
+            <ImageView
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:scaleType="fitXY"
+                android:layout_gravity="center"
+                android:src="@drawable/editprofile" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit Profile"
+                android:textColor="#000"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>
