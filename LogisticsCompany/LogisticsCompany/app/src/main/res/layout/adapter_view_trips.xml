@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cd_search_ride"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="@dimen/_2sdp"
+        app:cardCornerRadius="@dimen/_8sdp"
+        android:layout_margin="10dp"
+        app:cardBackgroundColor="#fff"
+        app:cardMaxElevation="@dimen/_6sdp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvTypeOfLoad"
+                android:layout_marginLeft="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textColor="#000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                android:id="@+id/tvPicupTime"
+                android:layout_below="@+id/tvTypeOfLoad"
+                android:layout_marginLeft="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:textColor="#000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tvPicupLocation"
+                android:layout_below="@+id/tvPicupTime"
+                android:layout_marginLeft="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:textColor="#000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tvDeliveryTime"
+                android:layout_below="@+id/tvPicupLocation"
+                android:layout_marginLeft="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:textColor="#000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tvDeliveryLocation"
+                android:layout_below="@+id/tvDeliveryTime"
+                android:layout_marginLeft="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:textColor="#000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tvCostperHour"
+                android:layout_below="@+id/tvDeliveryLocation"
+                android:layout_marginLeft="@dimen/_13sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:textColor="#000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+
+            <Button
+                android:id="@+id/btn_delete"
+                android:text="Delete Trip"
+                android:layout_below="@+id/tvCostperHour"
+                android:layout_margin="@dimen/_10sdp"
+                android:textAllCaps="false"
+                android:background="@drawable/button_design"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="40dp" />
+
+
+
+            <Button
+                android:id="@+id/btn_edit"
+                android:text="Edit Trip"
+                android:layout_below="@+id/tvCostperHour"
+                android:layout_alignParentRight="true"
+                android:layout_margin="@dimen/_10sdp"
+                android:textAllCaps="false"
+                android:background="@drawable/button_design"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="40dp" />
+
+
+
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>
