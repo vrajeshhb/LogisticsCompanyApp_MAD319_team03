@@ -24,13 +24,14 @@ import com.google.firebase.database.ValueEventListener;
 import com.logisticscompany.R;
 import com.logisticscompany.models.Users;
 
-public class AdminLoginActivity extends AppCompatActivity {
+public class    AdminLoginActivity extends AppCompatActivity {
      TextView signUpText;
      Button buttonLogin;
     TextInputEditText et_username,et_password;
     AutoCompleteTextView spinLoinType;
     ProgressDialog loadingBar;
     private String parentDbName = "Admin_Registration";
+    TextView tvForgotPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +44,15 @@ public class AdminLoginActivity extends AppCompatActivity {
         et_username = (TextInputEditText) findViewById(R.id.et_username);
         et_password = (TextInputEditText) findViewById(R.id.et_password);
         loadingBar = new ProgressDialog(AdminLoginActivity.this);
+
+        tvForgotPassword=(TextView)findViewById(R.id.tvForgotPassword);
+        tvForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AdminLoginActivity.this,ForgotPasswordActivity.class));
+                finish();
+            }
+        });
 
 
 

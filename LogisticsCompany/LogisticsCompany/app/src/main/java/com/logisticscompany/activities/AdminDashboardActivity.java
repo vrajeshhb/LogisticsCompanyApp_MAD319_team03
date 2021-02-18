@@ -19,7 +19,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
     private ActionBarDrawerToggle t;
     private NavigationView nv;
     private DrawerLayout dl;
-    CardView cdAddTrip,cdViewTrip;
+    CardView cdAddTrip,cdViewTrip,editprofile,driverinfo,cdCurrentTrips,cdCompletedTrips;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +30,10 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
         cdAddTrip=(CardView)findViewById(R.id.cdAddTrip);
         cdViewTrip=(CardView)findViewById(R.id.cdViewTrip);
+        editprofile=(CardView)findViewById(R.id.editprofile);
+        driverinfo=(CardView)findViewById(R.id.driverinfo);
+        cdCurrentTrips=(CardView)findViewById(R.id.cdCurrentTrips);
+        cdCompletedTrips=(CardView)findViewById(R.id.cdCompletedTrips);
 
         cdAddTrip.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,7 +44,41 @@ public class AdminDashboardActivity extends AppCompatActivity {
         cdViewTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AdminDashboardActivity.this,ViewTripsActivity.class));
+                startActivity(new Intent(AdminDashboardActivity.this, ViewMyTripsActivity.class));
+
+            }
+        });
+        editprofile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AdminDashboardActivity.this,AdminEditProfileActivity.class));
+
+
+            }
+        });
+        driverinfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AdminDashboardActivity.this,ViewDriversInfoActivity.class));
+
+
+            }
+        });
+
+
+        cdCurrentTrips.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AdminDashboardActivity.this,AdminCurrentTripsActivity.class));
+
+
+            }
+        });
+        cdCompletedTrips.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AdminDashboardActivity.this,AdminCompletedTripsActivity.class));
+
 
             }
         });
@@ -65,13 +103,19 @@ public class AdminDashboardActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case R.id.viewTrip:
-                        Intent intent1 = new Intent(getApplicationContext(), ViewTripsActivity.class);
+                        Intent intent1 = new Intent(getApplicationContext(), ViewMyTripsActivity.class);
                         startActivity(intent1);
                         break;
 
                     case R.id.viewDriversInfo:
                         Intent driverinfo = new Intent(getApplicationContext(), ViewDriversInfoActivity.class);
                         startActivity(driverinfo);
+                        break;
+
+
+                    case R.id.myReq:
+                        Intent myreq = new Intent(getApplicationContext(), AdminRequestsActivity.class);
+                        startActivity(myreq);
                         break;
 
                     case R.id.edit_profile:

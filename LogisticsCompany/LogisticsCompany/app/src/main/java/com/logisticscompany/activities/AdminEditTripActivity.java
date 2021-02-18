@@ -31,6 +31,7 @@ public class AdminEditTripActivity extends AppCompatActivity {
     ProgressDialog loadingBar;
     DatabaseReference RootRef;
     private String parentDbName = "Add_trips";
+    String time_date;
     String username;
     SharedPreferences sp;
 
@@ -62,12 +63,14 @@ public class AdminEditTripActivity extends AppCompatActivity {
         textDeliveryLocation.setText(getIntent().getStringExtra("deliverylocation"));
         textCostPerHour.setText(getIntent().getStringExtra("costperhour"));
 
+
+        time_date=getIntent().getStringExtra("timedate");
         buttonUpdate=(Button)findViewById(R.id.buttonUpdate);
         buttonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //EditTripDetails();
-                Toast.makeText(AdminEditTripActivity.this, "Coming Soon", Toast.LENGTH_SHORT).show();
+                EditTripDetails();
+                //Toast.makeText(AdminEditTripActivity.this, "Coming Soon", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -80,6 +83,7 @@ public class AdminEditTripActivity extends AppCompatActivity {
         String deliverytime = textDeliveryTime.getText().toString();
         String deliverylocation = textDeliveryLocation.getText().toString();
         String costperhour = textCostPerHour.getText().toString();
+        String tripdate = getIntent().getStringExtra("tripdate");
 
         if (TextUtils.isEmpty(typeofload)) {
             Toast.makeText(this, "Type of load should not be empty...", Toast.LENGTH_SHORT).show();
@@ -111,14 +115,17 @@ public class AdminEditTripActivity extends AppCompatActivity {
                     userdataMap.put("deliverytime", deliverytime);
                     userdataMap.put("deliverylocation", deliverylocation);
                     userdataMap.put("costperhour", costperhour);
+                    userdataMap.put("status","Available");
+                    userdataMap.put("tripData_Time",time_date);
+                    userdataMap.put("tripdate",tripdate);
                     userdataMap.put("username", username);
-                    RootRef.child(parentDbName).child(username).updateChildren(userdataMap)
+                    RootRef.child(parentDbName).child(time_date).updateChildren(userdataMap)
                             .addOnCompleteListener(new OnCompleteListener() {
                                 @Override
                                 public void onComplete(@NonNull Task task) {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(AdminEditTripActivity.this, "Successfully updated", Toast.LENGTH_SHORT).show();
-                                        Intent i = new Intent(getApplicationContext(), AdminEditTripActivity.class);
+                                        Intent i = new Intent(getApplicationContext(), ViewMyTripsActivity.class);
                                         startActivity(i);
                                         finish();
                                     } else {
