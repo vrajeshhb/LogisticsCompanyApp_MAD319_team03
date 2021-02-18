@@ -16,41 +16,45 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.logisticscompany.R;
-import com.logisticscompany.adapters.ViewDriversAdapter;
 import com.logisticscompany.adapters.ViewTripsAdapter;
-import com.logisticscompany.models.DriversInfoPojo;
 import com.logisticscompany.models.ViewTripsPojo;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewDriversInfoActivity extends AppCompatActivity {
-    List<DriversInfoPojo> driversInfoPojo;
+public class ViewMyTripsActivity extends AppCompatActivity {
+    List<ViewTripsPojo> viewTripsPojo;
     ListView list_view;
+    private String parentDbName = "Add_trips";
+    String username;
+    SharedPreferences sp;
     ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_drivers_info);
+        setContentView(R.layout.activity_view_trips);
 
-        getSupportActionBar().setTitle("Drivers Info");
+        getSupportActionBar().setTitle("My Trips");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
+        sp = getSharedPreferences("AA", 0);
+        username = sp.getString("uname", "-");
+
         list_view=(ListView)findViewById(R.id.list_view);
 
-        driversInfoPojo=new ArrayList<>();
-        getDriversDetails();
+        getTripDetails();
+
 
     }
-
-    private void getDriversDetails() {
-        driversInfoPojo = new ArrayList<>();
-        progressDialog = new ProgressDialog(ViewDriversInfoActivity.this);
+    private void getTripDetails() {
+        viewTripsPojo = new ArrayList<>();
+        progressDialog = new ProgressDialog(ViewMyTripsActivity.this);
         progressDialog.setTitle("Please Wait data is being Loaded");
         progressDialog.show();
-        Query query = FirebaseDatabase.getInstance().getReference("Driver_Registration");
+        Query query = FirebaseDatabase.getInstance().getReference("Add_trips").orderByChild("username").equalTo(username);
         query.addListenerForSingleValueEvent(valueEventListener);
     }
 
@@ -58,17 +62,20 @@ public class ViewDriversInfoActivity extends AppCompatActivity {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
             progressDialog.dismiss();
-            driversInfoPojo.clear();
+            viewTripsPojo.clear();
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    DriversInfoPojo driverInfo = snapshot.getValue(DriversInfoPojo.class);
-                    driversInfoPojo.add(driverInfo);
+                    ViewTripsPojo viewtrips = snapshot.getValue(ViewTripsPojo.class);
+                    if (viewtrips.getStatus().equals("Available")) {
+                        viewTripsPojo.add(viewtrips);
+                    }
+
                 }
-                if (driversInfoPojo.size() > 0) {
-                    list_view.setAdapter(new ViewDriversAdapter( ViewDriversInfoActivity.this,driversInfoPojo));
+                if (viewTripsPojo.size() > 0) {
+                    list_view.setAdapter(new ViewTripsAdapter( ViewMyTripsActivity.this,viewTripsPojo));
                 }
             } else {
-                Toast.makeText(ViewDriversInfoActivity.this, "No data Found", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ViewMyTripsActivity.this, "No Trips Available", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -78,6 +85,8 @@ public class ViewDriversInfoActivity extends AppCompatActivity {
 
         }
     };
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
