@@ -12,7 +12,7 @@ import android.view.View;
 import com.logisticscompany.R;
 
 public class DriversDashboardActivity extends AppCompatActivity {
-    CardView cdAvailableTrips,cdCurrentTrips,cdCompletedTrips,editprofile;
+    CardView cdAvailableTrips,cdCurrentTrips,cdCompletedTrips,editprofile,cdMyRequests;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class DriversDashboardActivity extends AppCompatActivity {
         cdCurrentTrips.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DriversDashboardActivity.this,CurrentTripsActivity.class));
+                startActivity(new Intent(DriversDashboardActivity.this,DriverCurrentTripsActivity.class));
 
 
             }
@@ -43,6 +43,16 @@ public class DriversDashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(DriversDashboardActivity.this,CompletedTripsActivity.class));
+
+
+            }
+        });
+
+        cdMyRequests=(CardView)findViewById(R.id.cdMyRequests);
+        cdMyRequests.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DriversDashboardActivity.this,DriverRequestsActivity .class));
 
 
             }

@@ -26,7 +26,7 @@ import com.logisticscompany.models.DriverPojo;
 import com.logisticscompany.models.Users;
 
 public class DriverLoginActivity extends AppCompatActivity {
-    TextView signUpText;
+    TextView signUpText,tvForgotPassword;
     Button buttonLogin;
     TextInputEditText et_username,et_password;
     AutoCompleteTextView spinLoinType;
@@ -52,8 +52,19 @@ public class DriverLoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(DriverLoginActivity.this,DriverRegistrationActivity.class));
+                finish();
             }
         });
+        tvForgotPassword=(TextView)findViewById(R.id.tvForgotPassword);
+        tvForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DriverLoginActivity.this,DriverForgotPasswordActivity.class));
+
+
+            }
+        });
+
 
         buttonLogin=(Button)findViewById(R.id.buttonLogin);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
