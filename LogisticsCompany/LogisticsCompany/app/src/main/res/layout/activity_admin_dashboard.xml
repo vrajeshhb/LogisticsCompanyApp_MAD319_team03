@@ -7,8 +7,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F8F7F7">
-
-    <RelativeLayout
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".activities.MainActivity">
@@ -101,10 +104,101 @@
         </androidx.cardview.widget.CardView>
 
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cdCurrentTrips"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="@dimen/_3sdp"
+            app:cardCornerRadius="@dimen/_10sdp"
+            android:layout_margin="@dimen/_6sdp"
+            app:cardBackgroundColor="#fff"
+            app:cardMaxElevation="12dp"
+            android:background="@color/whiteCardColor">
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/whiteCardColor">
+
+                <ImageView
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"
+                    android:scaleType="fitXY"
+                    android:layout_gravity="center"
+                    android:src="@drawable/currenttrips" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Current Trips"
+                    android:textColor="#000"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cdCompletedTrips"
+            android:layout_below="@+id/cdCurrentTrips"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="@dimen/_3sdp"
+            app:cardCornerRadius="@dimen/_10sdp"
+            android:layout_margin="@dimen/_6sdp"
+            app:cardBackgroundColor="#fff"
+            app:cardMaxElevation="12dp"
+            android:background="@color/whiteCardColor">
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/whiteCardColor">
+
+                <ImageView
+                    android:layout_width="@dimen/_100sdp"
+                    android:layout_height="@dimen/_100sdp"
+                    android:scaleType="fitXY"
+                    android:layout_gravity="center"
+                    android:src="@drawable/comptrip" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Completed Trips"
+                    android:textColor="#000"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
 
 
 
         <androidx.cardview.widget.CardView
+            android:visibility="gone"
             android:layout_below="@+id/cdViewTrip"
             android:id="@+id/driverinfo"
             android:layout_width="match_parent"
@@ -192,8 +286,8 @@
         </androidx.cardview.widget.CardView>
 
 
-    </RelativeLayout>
-
+    </LinearLayout>
+    </ScrollView>
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
