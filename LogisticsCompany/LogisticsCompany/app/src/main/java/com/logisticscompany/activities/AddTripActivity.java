@@ -3,6 +3,7 @@ package com.logisticscompany.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -33,12 +35,14 @@ import java.util.Locale;
 
 public class AddTripActivity extends AppCompatActivity {
     TextInputEditText textTypeOfLoad,textPicuptime,
-            textPicuplocation,textDeliveryTime,textDeliveryLocation,textCostPerHour;
+            textPicuplocation,textDeliveryTime,textDeliveryLocation,textCostPerHour,etDate;
     Button buttonSubmit;
     ProgressDialog loadingBar;
     SharedPreferences sp;
     String username;
     String currentDate,currentTime;
+    int mYear, mMonth, mDay;
+    String DAY, MONTH, YEAR;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +53,6 @@ public class AddTripActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        loadingBar = new ProgressDialog(AddTripActivity.this);
-         currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-         currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
 
         textTypeOfLoad=(TextInputEditText)findViewById(R.id.textTypeOfLoad);
         textPicuptime=(TextInputEditText)findViewById(R.id.textPicuptime);
@@ -59,6 +60,22 @@ public class AddTripActivity extends AppCompatActivity {
         textDeliveryTime=(TextInputEditText)findViewById(R.id.textDeliveryTime);
         textDeliveryLocation=(TextInputEditText)findViewById(R.id.textDeliveryLocation);
         textCostPerHour=(TextInputEditText)findViewById(R.id.textCostPerHour);
+        etDate=(TextInputEditText)findViewById(R.id.etDate);
+
+        loadingBar = new ProgressDialog(AddTripActivity.this);
+         currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+         currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+
+
+        etDate.setFocusable(false);
+        etDate.setClickable(true);
+        etDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                datepicker();
+
+            }
+        });
 
         textPicuptime.setFocusable(false);
         textDeliveryTime.setFocusable(false);
@@ -144,6 +161,9 @@ public class AddTripActivity extends AppCompatActivity {
                 userdataMap.put("deliverytime", deliverytime);
                 userdataMap.put("deliverylocation", deliverylocation);
                 userdataMap.put("costperhour", costperhour);
+                userdataMap.put("status","Available");
+                userdataMap.put("tripData_Time",currentDate+currentTime);
+                userdataMap.put("tripdate",etDate.getText().toString());
                 userdataMap.put("username", username);
 
                 RootRef.child("Add_trips").child(currentDate+currentTime).updateChildren(userdataMap)
@@ -207,6 +227,31 @@ public class AddTripActivity extends AppCompatActivity {
         mTimePicker.setTitle("Select Time");
         mTimePicker.show();
 
+    }
+    public void datepicker() {
+
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+                        DAY = dayOfMonth + "";
+                        MONTH = monthOfYear + 1 + "";
+                        YEAR = year + "";
+
+                        etDate.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+
+        datePickerDialog.show();
     }
 
 

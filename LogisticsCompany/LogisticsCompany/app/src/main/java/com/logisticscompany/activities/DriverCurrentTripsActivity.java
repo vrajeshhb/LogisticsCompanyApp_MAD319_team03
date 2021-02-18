@@ -1,4 +1,4 @@
-package com.logisticscompany.activities;
+ package com.logisticscompany.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,37 +11,37 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.logisticscompany.R;
-import com.logisticscompany.adapters.AvailableTripsAdapter;
+import com.logisticscompany.adapters.DriverCurrentTripsAdapter;
 import com.logisticscompany.adapters.ViewTripsAdapter;
 import com.logisticscompany.models.ViewTripsPojo;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AvailableTripsActivity extends AppCompatActivity {
+public class DriverCurrentTripsActivity extends AppCompatActivity {
     List<ViewTripsPojo> viewTripsPojo;
     ListView list_view;
     private String parentDbName = "Add_trips";
     String username;
     SharedPreferences sp;
     ProgressDialog progressDialog;
-    DatabaseReference dbMyTrips;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_available_trips);
+        setContentView(R.layout.activity_driver_current_trips);
 
-
-        getSupportActionBar().setTitle("Available Trips");
+        getSupportActionBar().setTitle("Current Trips");
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        sp = getSharedPreferences("AA", 0);
+        username = sp.getString("uname", "-");
 
         list_view=(ListView)findViewById(R.id.list_view);
 
@@ -50,10 +50,10 @@ public class AvailableTripsActivity extends AppCompatActivity {
 
     private void getTripDetails() {
         viewTripsPojo = new ArrayList<>();
-        progressDialog = new ProgressDialog(AvailableTripsActivity.this);
+        progressDialog = new ProgressDialog(DriverCurrentTripsActivity.this);
         progressDialog.setTitle("Please Wait data is being Loaded");
         progressDialog.show();
-        Query query = FirebaseDatabase.getInstance().getReference("Add_trips");
+        Query query = FirebaseDatabase.getInstance().getReference("Add_trips").orderByChild("Drivername").equalTo(username);
         query.addListenerForSingleValueEvent(valueEventListener);
     }
 
@@ -64,17 +64,14 @@ public class AvailableTripsActivity extends AppCompatActivity {
             viewTripsPojo.clear();
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    ViewTripsPojo tripdetails = snapshot.getValue(ViewTripsPojo.class);
-                    if (tripdetails.getStatus().equals("Available")) {
-                        viewTripsPojo.add(tripdetails);
-                    }
-                    //viewTripsPojo.add(tripdetails);
+                    ViewTripsPojo student = snapshot.getValue(ViewTripsPojo.class);
+                    viewTripsPojo.add(student);
                 }
                 if (viewTripsPojo.size() > 0) {
-                    list_view.setAdapter(new AvailableTripsAdapter( AvailableTripsActivity.this,viewTripsPojo));
+                    list_view.setAdapter(new DriverCurrentTripsAdapter( DriverCurrentTripsActivity.this,viewTripsPojo,username));
                 }
             } else {
-                Toast.makeText(AvailableTripsActivity.this, "No Trips Available", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DriverCurrentTripsActivity.this, "No Trips Available", Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -84,7 +81,6 @@ public class AvailableTripsActivity extends AppCompatActivity {
 
         }
     };
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
