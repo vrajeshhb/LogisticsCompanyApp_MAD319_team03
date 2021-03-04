@@ -15,6 +15,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,20 +40,19 @@ import java.util.HashMap;
 public class DriverRegistrationActivity extends AppCompatActivity {
     TextView loginText;
     Button btn_register,btn_upload_licence;
-    TextInputEditText et_email,et_username,et_password,et_last_name,et_first_name,et_phoneno,et_type_of_vehicle,et_vehicle_reg_num;
+    TextInputEditText etSquestion,et_email,et_username,et_password,et_last_name,et_first_name,et_phoneno,et_type_of_vehicle,et_vehicle_reg_num;
     ProgressDialog loadingBar;
     private static final int GalleryPick = 1;
     private Uri ImageUri;
     private StorageReference ProductImagesRef;
     String downloadImageUrl;
     ImageView image_view;
-    String fname,lname,phone,email,password,username,typeofvehicle,vehicleregnum;
-
+    String fname,lname,phone,email,password,username,typeofvehicle,vehicleregnum,sanswer;
+    Spinner spSQuestions;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_registration);
-
 
         getSupportActionBar().setTitle("Driver Registration");
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -62,17 +62,22 @@ public class DriverRegistrationActivity extends AppCompatActivity {
         loadingBar = new ProgressDialog(DriverRegistrationActivity.this);
 
         et_last_name = (TextInputEditText) findViewById(R.id.et_last_name);
+
         et_first_name = (TextInputEditText) findViewById(R.id.et_first_name);
+
         et_email = (TextInputEditText) findViewById(R.id.et_email);
         et_phoneno = (TextInputEditText) findViewById(R.id.et_phoneno);
         et_username = (TextInputEditText) findViewById(R.id.et_username);
         et_password = (TextInputEditText) findViewById(R.id.et_password);
         et_type_of_vehicle = (TextInputEditText) findViewById(R.id.et_type_of_vehicle);
         et_vehicle_reg_num = (TextInputEditText) findViewById(R.id.et_vehicle_reg_num);
+        etSquestion = (TextInputEditText) findViewById(R.id.etSquestion);
         image_view=(ImageView)findViewById(R.id.image_view);
         loadingBar = new ProgressDialog(DriverRegistrationActivity.this);
 
         loginText = (TextView) findViewById(R.id.loginText);
+        spSQuestions = (Spinner) findViewById(R.id.spSQuestions);
+
         loginText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,6 +86,7 @@ public class DriverRegistrationActivity extends AppCompatActivity {
         });
 
         btn_register = (Button) findViewById(R.id.btn_register);
+
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,6 +132,7 @@ public class DriverRegistrationActivity extends AppCompatActivity {
         password = et_password.getText().toString();
         username = et_username.getText().toString();
         typeofvehicle=et_type_of_vehicle.getText().toString();
+        sanswer=etSquestion.getText().toString();
         vehicleregnum=et_vehicle_reg_num.getText().toString();
 
         if (ImageUri == null)
@@ -166,6 +173,10 @@ public class DriverRegistrationActivity extends AppCompatActivity {
         else if (TextUtils.isEmpty(vehicleregnum))
         {
             Toast.makeText(this, "Please write your Vehicle Reg Number...", Toast.LENGTH_SHORT).show();
+        }
+        else if (TextUtils.isEmpty(sanswer))
+        {
+            Toast.makeText(this, "Please write your Answer...", Toast.LENGTH_SHORT).show();
         }
 
         else
@@ -246,7 +257,8 @@ public class DriverRegistrationActivity extends AppCompatActivity {
                     userdataMap.put("Password", password);
                     userdataMap.put("Vehiclerenum", vehicleregnum);
                     userdataMap.put("Vehicle_type", typeofvehicle);
-
+                    userdataMap.put("security_question_type", spSQuestions.getSelectedItem().toString());
+                    userdataMap.put("security_question_answer", sanswer);
                     RootRef.child("Driver_Registration").child(username).updateChildren(userdataMap)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override

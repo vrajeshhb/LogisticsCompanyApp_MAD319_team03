@@ -59,9 +59,9 @@ public class DriverLoginActivity extends AppCompatActivity {
         tvForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DriverLoginActivity.this,DriverForgotPasswordActivity.class));
+                //startActivity(new Intent(DriverLoginActivity.this,DriverForgotPasswordActivity.class));
 
-
+                startActivity(new Intent(DriverLoginActivity.this,ForgotPwdNewActivity.class));
             }
         });
 
@@ -136,6 +136,7 @@ public class DriverLoginActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
