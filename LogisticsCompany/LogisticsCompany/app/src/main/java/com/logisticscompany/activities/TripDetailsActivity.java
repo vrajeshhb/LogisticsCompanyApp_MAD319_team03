@@ -6,11 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,13 +29,14 @@ import com.logisticscompany.R;
 import java.util.HashMap;
 
 public class TripDetailsActivity extends AppCompatActivity {
-    TextView tvTypeOfLoad,tvPickupTime,tvTripdate,tvPickUpLocation,tvDeliveryTime,tvDeliveryLocation,tvCostperHour;
-    Button btnAccept,btnReject;
+    TextView tvTypeOfLoad, tvPickupTime, tvTripdate, tvPickUpLocation, tvDeliveryTime, tvDeliveryLocation, tvCostperHour;
+    Button btnAccept, btnReject, btnTripRoute;
     DatabaseReference RootRef;
     private String parentDbName = "Add_trips";
-    String username,typeofload,pickuptime,pickuplocation,deliverytime,deliverylocation,costperhour,time_date,Driveruname,tripdate;
+    String username, typeofload, pickuptime, pickuplocation, deliverytime, deliverylocation, costperhour, time_date, Driveruname, tripdate;
     SharedPreferences sp;
     ProgressDialog loadingBar;
+    ImageView imagePickUpLocation, imageDropLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,24 +50,24 @@ public class TripDetailsActivity extends AppCompatActivity {
         loadingBar = new ProgressDialog(this);
         RootRef = FirebaseDatabase.getInstance().getReference();
 
-        tvTypeOfLoad=(TextView) findViewById(R.id.tvTypeOfLoad);
-        tvPickupTime=(TextView)findViewById(R.id.tvPickupTime);
-        tvPickUpLocation=(TextView)findViewById(R.id.tvPickUpLocation);
-        tvDeliveryTime=(TextView)findViewById(R.id.tvDeliveryTime);
-        tvDeliveryLocation=(TextView)findViewById(R.id.tvDeliveryLocation);
-        tvCostperHour=(TextView)findViewById(R.id.tvCostperHour);
-        tvTripdate=(TextView)findViewById(R.id.tvTripdate);
+        tvTypeOfLoad = (TextView) findViewById(R.id.tvTypeOfLoad);
+        tvPickupTime = (TextView) findViewById(R.id.tvPickupTime);
+        tvPickUpLocation = (TextView) findViewById(R.id.tvPickUpLocation);
+        tvDeliveryTime = (TextView) findViewById(R.id.tvDeliveryTime);
+        tvDeliveryLocation = (TextView) findViewById(R.id.tvDeliveryLocation);
+        tvCostperHour = (TextView) findViewById(R.id.tvCostperHour);
+        tvTripdate = (TextView) findViewById(R.id.tvTripdate);
 
         sp = getSharedPreferences("AA", 0);
         Driveruname = sp.getString("uname", "-");
 
-        tvTypeOfLoad.setText("Type Of Load  :"+getIntent().getStringExtra("typeofload"));
-        tvPickupTime.setText("Pick Up Time  :"+getIntent().getStringExtra("pickuptime"));
-        tvPickUpLocation.setText("Pick Up Location  :"+getIntent().getStringExtra("pickuplocation"));
-        tvDeliveryTime.setText("Delivery Time  :"+getIntent().getStringExtra("deliverytime"));
-        tvDeliveryLocation.setText("Delivery Location  :"+getIntent().getStringExtra("deliverylocation"));
-        tvCostperHour.setText("Cost Per Hour  :"+getIntent().getStringExtra("costperhour")+"$");
-        tvTripdate.setText("Date  :"+getIntent().getStringExtra("tripdate"));
+        tvTypeOfLoad.setText("Type Of Load  :" + getIntent().getStringExtra("typeofload"));
+        tvPickupTime.setText("Pick Up Time  :" + getIntent().getStringExtra("pickuptime"));
+        tvPickUpLocation.setText("Pick Up Location  :" + getIntent().getStringExtra("pickuplocation"));
+        tvDeliveryTime.setText("Delivery Time  :" + getIntent().getStringExtra("deliverytime"));
+        tvDeliveryLocation.setText("Delivery Location  :" + getIntent().getStringExtra("deliverylocation"));
+        tvCostperHour.setText("Cost Per Hour  :" + getIntent().getStringExtra("costperhour") + "$");
+        tvTripdate.setText("Date  :" + getIntent().getStringExtra("tripdate"));
 
         username = getIntent().getStringExtra("username");
         typeofload = getIntent().getStringExtra("typeofload");
@@ -75,9 +78,32 @@ public class TripDetailsActivity extends AppCompatActivity {
         costperhour = getIntent().getStringExtra("costperhour");
         time_date = getIntent().getStringExtra("timedate");
         tripdate = getIntent().getStringExtra("tripdate");
+        String source, destination;
+        source = getIntent().getStringExtra("picklat") + "," + getIntent().getStringExtra("piclang");
+        destination = getIntent().getStringExtra("deliverylat") + "," + getIntent().getStringExtra("deliverylang");
 
-        btnAccept=(Button)findViewById(R.id.btnAccept);
-        btnReject=(Button)findViewById(R.id.btnReject);
+        btnTripRoute = (Button) findViewById(R.id.btnTripRoute);
+        btnTripRoute.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
+                        Uri.parse("http://maps.google.com/maps?saddr=" + source + "&daddr=" + destination));
+                startActivity(intent);
+
+
+            }
+        });
+        imageDropLocation = (ImageView) findViewById(R.id.imageDropLocation);
+        imageDropLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        btnAccept = (Button) findViewById(R.id.btnAccept);
+        btnReject = (Button) findViewById(R.id.btnReject);
         btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -129,6 +155,7 @@ public class TripDetailsActivity extends AppCompatActivity {
                             }
                         });
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
@@ -139,6 +166,7 @@ public class TripDetailsActivity extends AppCompatActivity {
         });
 
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
