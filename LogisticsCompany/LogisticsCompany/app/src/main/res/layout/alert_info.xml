@@ -1,0 +1,125 @@
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tvTypeOfLoad"
+            android:text="@string/app_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_13sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="@font/poppinsmedium"
+            android:textColor="#000" />
+
+
+
+        <TextView
+            android:id="@+id/tvPicupLocation"
+            android:layout_width="match_parent"
+            android:text="@string/app_name"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvTypeOfLoad"
+            android:layout_marginLeft="@dimen/_13sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:fontFamily="@font/poppinsmedium"
+            android:textColor="#000" />
+
+
+
+        <TextView
+            android:id="@+id/tvDeliveryLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:layout_below="@+id/tvPicupLocation"
+            android:layout_marginLeft="@dimen/_13sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:fontFamily="@font/poppinsmedium"
+            android:textColor="#000" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tvCostperHour"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:layout_below="@+id/tvDeliveryLocation"
+            android:layout_marginLeft="@dimen/_13sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:fontFamily="@font/poppinsmedium"
+            android:textColor="#000" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tvTripDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:layout_below="@+id/tvCostperHour"
+            android:layout_marginLeft="@dimen/_13sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:fontFamily="@font/poppinsmedium"
+            android:textColor="#000" />
+
+        <TextView
+            android:id="@+id/tvTripStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:layout_below="@+id/tvTripDate"
+            android:layout_marginLeft="@dimen/_13sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:fontFamily="@font/poppinsmedium"
+            android:textColor="#000" />
+
+        <TextView
+            android:id="@+id/tvDriverName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:layout_below="@+id/tvTripStatus"
+            android:layout_marginLeft="@dimen/_13sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:fontFamily="@font/poppinsmedium"
+            android:textColor="#000" />
+
+
+        <Button
+            android:id="@+id/btnRoute"
+            android:text="Route"
+            android:layout_below="@+id/tvDriverName"
+            android:layout_margin="@dimen/_10sdp"
+            android:textAllCaps="false"
+            android:fontFamily="@font/poppinsmedium"
+            android:background="@drawable/button_design"
+            android:layout_width="@dimen/_80ssp"
+            android:layout_height="@dimen/_30ssp" />
+
+
+
+        <Button
+            android:id="@+id/btnOk"
+            android:text="OK"
+            android:layout_below="@+id/tvDriverName"
+            android:layout_alignParentRight="true"
+            android:layout_margin="@dimen/_10sdp"
+            android:textAllCaps="false"
+            android:fontFamily="@font/poppinsmedium"
+            android:background="@drawable/button_design"
+            android:layout_width="@dimen/_80ssp"
+            android:layout_height="@dimen/_30ssp" />
+
+
+    </RelativeLayout>
+
+</ScrollView>
+
