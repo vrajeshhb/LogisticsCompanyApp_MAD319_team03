@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
     <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -37,6 +35,7 @@
 
 
         <ImageView
+            android:id="@+id/imagePickUpLocation"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_13sdp"
             android:layout_alignParentRight="true"
@@ -72,6 +71,7 @@
             android:layout_marginRight="30dp"/>
 
         <ImageView
+            android:id="@+id/imageDropLocation"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_13sdp"
             android:layout_alignParentRight="true"
@@ -118,22 +118,44 @@
 
 
         <Button
+            android:id="@+id/btnTripRoute"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_below="@+id/tvTripdate"
+            android:layout_marginTop="28dp"
+            android:layout_margin="@dimen/_6ssp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/button_design"
+            android:fontFamily="@font/poppinsmedium"
+            android:gravity="center_horizontal"
+            android:text="Trip Route"
+            android:textAllCaps="false" />
+
+        <Button
             android:id="@+id/btnAccept"
             android:text="Accept"
-            android:layout_below="@+id/tvTripdate"
+            android:layout_below="@+id/btnTripRoute"
             android:layout_marginTop="@dimen/_25sdp"
-            android:layout_marginLeft="@dimen/_13sdp"
+            android:layout_marginLeft="@dimen/_85ssp"
+            android:layout_marginRight="@dimen/_85ssp"
             android:textAllCaps="false"
+            android:gravity="center_horizontal"
             android:fontFamily="@font/poppinsmedium"
             android:background="@drawable/button_design"
-            android:layout_width="@dimen/_90sdp"
+            android:layout_width="match_parent"
             android:layout_height="40dp" />
+
+
+
+
+
 
 
 
         <Button
             android:id="@+id/btnReject"
             android:text="Reject"
+            android:visibility="gone"
             android:layout_below="@+id/tvTripdate"
             android:layout_marginTop="@dimen/_25sdp"
             android:layout_marginRight="@dimen/_13sdp"
