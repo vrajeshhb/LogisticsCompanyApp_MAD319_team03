@@ -83,6 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
+
                 android:hint="Password"
                 app:layout_constraintTop_toBottomOf="@+id/textInputLayoutUsername"
                 tools:layout_editor_absoluteX="0dp">
@@ -91,6 +92,7 @@
                     android:id="@+id/et_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="textPassword"
                     android:drawableEnd="@drawable/ic_baseline_lock_open_24"
                     android:drawableRight="@drawable/ic_baseline_lock_open_24"
                     android:fontFamily="@font/poppinsmedium"
