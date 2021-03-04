@@ -20,102 +20,73 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/tvTypeOfLoad"
+                android:id="@+id/tvVehicleType"
                 android:layout_marginLeft="@dimen/_13sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:textColor="#000"
-                android:fontFamily="@font/poppinsmedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
 
             <TextView
-                android:id="@+id/tvPicupTime"
-                android:layout_below="@+id/tvTypeOfLoad"
+                android:id="@+id/tvVehicleNO"
+                android:layout_below="@+id/tvVehicleType"
                 android:layout_marginLeft="@dimen/_13sdp"
                 android:layout_marginTop="@dimen/_2sdp"
                 android:textColor="#000"
-                android:fontFamily="@font/poppinsmedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/tvPicupLocation"
-                android:layout_below="@+id/tvPicupTime"
+                android:id="@+id/tvMessage"
+                android:layout_below="@+id/tvVehicleNO"
                 android:layout_marginLeft="@dimen/_13sdp"
                 android:layout_marginTop="@dimen/_2sdp"
                 android:textColor="#000"
-                android:fontFamily="@font/poppinsmedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/tvDeliveryTime"
-                android:layout_below="@+id/tvPicupLocation"
+                android:id="@+id/tvHireby"
+                android:layout_below="@+id/tvMessage"
                 android:layout_marginLeft="@dimen/_13sdp"
                 android:layout_marginTop="@dimen/_2sdp"
                 android:textColor="#000"
-                android:fontFamily="@font/poppinsmedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/tvDeliveryLocation"
-                android:layout_below="@+id/tvDeliveryTime"
+                android:id="@+id/tvStatus"
+                android:layout_below="@+id/tvHireby"
                 android:layout_marginLeft="@dimen/_13sdp"
                 android:layout_marginTop="@dimen/_2sdp"
                 android:textColor="#000"
-                android:fontFamily="@font/poppinsmedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/tvCostperHour"
-                android:layout_below="@+id/tvDeliveryLocation"
-                android:layout_marginLeft="@dimen/_13sdp"
-                android:layout_marginTop="@dimen/_2sdp"
-                android:textColor="#000"
-                android:fontFamily="@font/poppinsmedium"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-
-            <TextView
-                android:id="@+id/tvTripdate"
-                android:layout_below="@+id/tvCostperHour"
-                android:layout_marginLeft="@dimen/_13sdp"
-                android:layout_marginTop="@dimen/_2sdp"
-                android:textColor="#000"
-                android:fontFamily="@font/poppinsmedium"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-
 
             <Button
-                android:id="@+id/btnReviews"
-                android:text="Reviews"
-                android:visibility="gone"
-                android:layout_below="@+id/tvTripdate"
+                android:id="@+id/btnRejact"
+                android:text="Reject"
+                android:layout_below="@+id/tvStatus"
                 android:layout_margin="@dimen/_10sdp"
                 android:textAllCaps="false"
-                android:fontFamily="@font/poppinsmedium"
                 android:background="@drawable/button_design"
                 android:layout_width="@dimen/_90sdp"
                 android:layout_height="40dp" />
 
 
 
+
+
             <Button
-                android:id="@+id/btnTripDetails"
-                android:text="Trip Details"
-                android:layout_below="@+id/tvTripdate"
+                android:id="@+id/btnAccept"
+                android:text="Accept"
+                android:layout_below="@+id/tvStatus"
                 android:layout_alignParentRight="true"
                 android:layout_margin="@dimen/_10sdp"
                 android:textAllCaps="false"
-                android:fontFamily="@font/poppinsmedium"
                 android:background="@drawable/button_design"
-                android:layout_width="@dimen/_110sdp"
+                android:layout_width="@dimen/_90sdp"
                 android:layout_height="40dp" />
 
 
