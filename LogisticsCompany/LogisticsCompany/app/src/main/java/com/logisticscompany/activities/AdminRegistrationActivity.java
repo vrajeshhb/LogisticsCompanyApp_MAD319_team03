@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,9 +29,10 @@ import java.util.HashMap;
 public class AdminRegistrationActivity extends AppCompatActivity {
     TextView loginText;
     Button btn_register;
-    TextInputEditText et_email,et_username,et_password,et_last_name,et_first_name,et_phoneno;
+    TextInputEditText etSquestion,et_email,et_username,et_password,et_last_name,et_first_name,et_phoneno;
     ProgressDialog loadingBar;
-
+    Spinner spSQuestions;
+    String sanswer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +49,8 @@ public class AdminRegistrationActivity extends AppCompatActivity {
         et_username = (TextInputEditText) findViewById(R.id.et_username);
         et_password = (TextInputEditText) findViewById(R.id.et_password);
         loadingBar = new ProgressDialog(AdminRegistrationActivity.this);
-
+        spSQuestions = (Spinner) findViewById(R.id.spSQuestions);
+        etSquestion = (TextInputEditText) findViewById(R.id.etSquestion);
         loginText = (TextView) findViewById(R.id.loginText);
         loginText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +77,7 @@ public class AdminRegistrationActivity extends AppCompatActivity {
         String eMail = et_email.getText().toString();
         String password = et_password.getText().toString();
         String username = et_username.getText().toString();
+        sanswer=etSquestion.getText().toString();
 
         if (TextUtils.isEmpty(firstname)) {
             Toast.makeText(this, "Please write your Firstname...", Toast.LENGTH_SHORT).show();
@@ -96,7 +100,12 @@ public class AdminRegistrationActivity extends AppCompatActivity {
         } else if (TextUtils.isEmpty(password)) {
             Toast.makeText(this, "Please write your password...", Toast.LENGTH_SHORT).show();
             return;
-        } else {
+        }
+        else if (TextUtils.isEmpty(sanswer))
+        {
+            Toast.makeText(this, "Please write your Answer...", Toast.LENGTH_SHORT).show();
+        }
+        else {
             loadingBar.setTitle("Create Account");
             loadingBar.setMessage("Please wait, while we are checking the credentials.");
             loadingBar.setCanceledOnTouchOutside(false);
@@ -122,7 +131,8 @@ public class AdminRegistrationActivity extends AppCompatActivity {
                     userdataMap.put("Phoneno", phoneno);
                     userdataMap.put("Username", username);
                     userdataMap.put("Password", password);
-
+                    userdataMap.put("security_question_type", spSQuestions.getSelectedItem().toString());
+                    userdataMap.put("security_question_answer", sanswer);
 
                     RootRef.child("Admin_Registration").child(username).updateChildren(userdataMap)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {

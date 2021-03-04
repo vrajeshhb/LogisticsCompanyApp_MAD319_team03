@@ -49,7 +49,7 @@ public class    AdminLoginActivity extends AppCompatActivity {
         tvForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AdminLoginActivity.this,ForgotPasswordActivity.class));
+                startActivity(new Intent(AdminLoginActivity.this,ForgotPwdNewActivity1.class));
                 finish();
             }
         });

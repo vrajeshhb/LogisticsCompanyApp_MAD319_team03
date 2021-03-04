@@ -108,6 +108,7 @@ public class AdminEditTripActivity extends AppCompatActivity {
             RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                     HashMap<String, Object> userdataMap = new HashMap<>();
                     userdataMap.put("typeofload", typeofload);
                     userdataMap.put("pickuptime", pickuptime);
@@ -118,6 +119,12 @@ public class AdminEditTripActivity extends AppCompatActivity {
                     userdataMap.put("status","Available");
                     userdataMap.put("tripData_Time",time_date);
                     userdataMap.put("tripdate",tripdate);
+
+                    userdataMap.put("PLLat", getIntent().getStringExtra("PLLat"));
+                    userdataMap.put("PLlng", getIntent().getStringExtra("PLlng"));
+                    userdataMap.put("DLLat", getIntent().getStringExtra("DLLat"));
+                    userdataMap.put("DLLng", getIntent().getStringExtra("DLLng"));
+
                     userdataMap.put("username", username);
                     RootRef.child(parentDbName).child(time_date).updateChildren(userdataMap)
                             .addOnCompleteListener(new OnCompleteListener() {
