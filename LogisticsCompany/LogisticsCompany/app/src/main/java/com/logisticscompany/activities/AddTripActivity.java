@@ -1,6 +1,7 @@
 package com.logisticscompany.activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -43,7 +45,10 @@ public class AddTripActivity extends AppCompatActivity {
     String currentDate,currentTime;
     int mYear, mMonth, mDay;
     String DAY, MONTH, YEAR;
-
+    Button btnPickupLocation,btnDeliveryLocation;
+    TextView tvPickLoc,tvDeliveryLoc;
+    String PLLat,PLlng,DLLat,DLLng;
+    public static final int PICK_UP_FG=100,DEL_FG=200;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +60,24 @@ public class AddTripActivity extends AppCompatActivity {
 
 
         textTypeOfLoad=(TextInputEditText)findViewById(R.id.textTypeOfLoad);
+        tvPickLoc=(TextView)findViewById(R.id.tvPickLoc);
+        tvDeliveryLoc=(TextView)findViewById(R.id.tvDeliveryLoc);
+        btnPickupLocation=(Button) findViewById(R.id.btnPickUpLocation);
+        btnDeliveryLocation=(Button) findViewById(R.id.btnDeliveryLocation);
+        btnPickupLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(new Intent(getApplicationContext(),MapsActivity.class),PICK_UP_FG);
+            }
+        });
+
+        btnDeliveryLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(new Intent(getApplicationContext(),MapsActivity.class),DEL_FG);
+            }
+        });
+
         textPicuptime=(TextInputEditText)findViewById(R.id.textPicuptime);
         textPicuplocation=(TextInputEditText)findViewById(R.id.textPicuplocation);
         textDeliveryTime=(TextInputEditText)findViewById(R.id.textDeliveryTime);
@@ -62,7 +85,9 @@ public class AddTripActivity extends AppCompatActivity {
         textCostPerHour=(TextInputEditText)findViewById(R.id.textCostPerHour);
         etDate=(TextInputEditText)findViewById(R.id.etDate);
 
+
         loadingBar = new ProgressDialog(AddTripActivity.this);
+
          currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
          currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
 
@@ -106,6 +131,23 @@ public class AddTripActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(PICK_UP_FG==requestCode){
+            tvPickLoc.setText("Lat : "+data.getStringExtra("lat")+" | Lng : "+data.getStringExtra("lng"));
+            PLLat=data.getStringExtra("lat");
+            PLlng=data.getStringExtra("lng");
+            textPicuplocation.setText(data.getStringExtra("address"));
+        }else{
+            tvDeliveryLoc.setText("Lat : "+data.getStringExtra("lat")+" | Lng : "+data.getStringExtra("lng"));
+            DLLat=data.getStringExtra("lat");
+            DLLng=data.getStringExtra("lng");
+            textDeliveryLocation.setText(data.getStringExtra("address"));
+        }
+        //Toast.makeText(getApplicationContext(),data.getStringExtra("lat"),Toast.LENGTH_SHORT).show();
     }
 
     private void AddTripDetails() {
@@ -165,6 +207,10 @@ public class AddTripActivity extends AppCompatActivity {
                 userdataMap.put("tripData_Time",currentDate+currentTime);
                 userdataMap.put("tripdate",etDate.getText().toString());
                 userdataMap.put("username", username);
+                userdataMap.put("PLLat", PLLat);
+                userdataMap.put("PLlng", PLlng);
+                userdataMap.put("DLLat", DLLat);
+                userdataMap.put("DLLng", DLLng);
 
                 RootRef.child("Add_trips").child(currentDate+currentTime).updateChildren(userdataMap)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {

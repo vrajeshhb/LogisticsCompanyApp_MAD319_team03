@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -22,6 +25,7 @@ import com.logisticscompany.models.ViewTripsPojo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class CompletedTripsActivity extends AppCompatActivity {
 
@@ -32,6 +36,8 @@ public class CompletedTripsActivity extends AppCompatActivity {
     SharedPreferences sp;
     ProgressDialog progressDialog;
     DatabaseReference dbMyTrips;
+    EditText et_search;
+    CompletedTripsAdapter completedTripsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +52,28 @@ public class CompletedTripsActivity extends AppCompatActivity {
         username = sp.getString("uname", "-");
 
         list_view=(ListView)findViewById(R.id.list_view);
+        et_search = (EditText)findViewById(R.id.et_search);
+        et_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable arg0) {
+                // TODO Auto-generated method stub
+                String text = et_search.getText().toString().toLowerCase(Locale.getDefault());
+                completedTripsAdapter.searchCompletedTrips(text);
+            }
 
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+                // TODO Auto-generated method stub
+            }
+        });
+
+
+        viewTripsPojo=new ArrayList<>();
         getTripDetails();
     }
     private void getTripDetails() {
@@ -69,7 +96,9 @@ public class CompletedTripsActivity extends AppCompatActivity {
                     viewTripsPojo.add(tripdetails);
                 }
                 if (viewTripsPojo.size() > 0) {
-                    list_view.setAdapter(new CompletedTripsAdapter( CompletedTripsActivity.this,viewTripsPojo,username));
+                    completedTripsAdapter=new CompletedTripsAdapter(CompletedTripsActivity.this,viewTripsPojo,username);
+                    list_view.setAdapter(completedTripsAdapter);
+                    //list_view.setAdapter(new CompletedTripsAdapter( CompletedTripsActivity.this,viewTripsPojo,username));
                 }
             } else {
                 Toast.makeText(CompletedTripsActivity.this, "No Trips Available", Toast.LENGTH_SHORT).show();
